@@ -1,7 +1,7 @@
 # Tiny Tapeout project information
 project:
-  title:        ""      # Project title
-  author:       ""      # Your name
+  title:        "Test Design 1" # Project title
+  author:       "Evan Armoogan" # Your name
   discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
   description:  ""      # One line description of what your project does
   language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
@@ -22,34 +22,34 @@ project:
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:
   # Inputs
-  ui[0]: ""
-  ui[1]: ""
-  ui[2]: ""
-  ui[3]: ""
-  ui[4]: ""
-  ui[5]: ""
-  ui[6]: ""
-  ui[7]: ""
+  ui[0]: "in_0"
+  ui[1]: "in_1"
+  ui[2]: "in_2"
+  ui[3]: "in_3"
+  ui[4]: "in_4"
+  ui[5]: "in_5"
+  ui[6]: "in_6"
+  ui[7]: "in_7"
 
   # Outputs
-  uo[0]: ""
-  uo[1]: ""
-  uo[2]: ""
-  uo[3]: ""
-  uo[4]: ""
-  uo[5]: ""
-  uo[6]: ""
-  uo[7]: ""
+  uo[0]: "out_0"
+  uo[1]: "out_1"
+  uo[2]: "out_2"
+  uo[3]: "out_3"
+  uo[4]: "out_4"
+  uo[5]: "out_5"
+  uo[6]: "out_6"
+  uo[7]: "out_7"
 
   # Bidirectional pins
-  uio[0]: ""
-  uio[1]: ""
-  uio[2]: ""
-  uio[3]: ""
-  uio[4]: ""
-  uio[5]: ""
-  uio[6]: ""
-  uio[7]: ""
+  uio[0]: "bidir_0"
+  uio[1]: "bidir_1"
+  uio[2]: "bidir_2"
+  uio[3]: "bidir_3"
+  uio[4]: "bidir_4"
+  uio[5]: "bidir_5"
+  uio[6]: "bidir_6"
+  uio[7]: "bidir_7"
 
 # Do not change!
 yaml_version: 6

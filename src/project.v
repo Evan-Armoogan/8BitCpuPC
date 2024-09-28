@@ -53,7 +53,7 @@ module JK_flip_flop(input j, input k, input clk, output reg q);
     endcase
 endmodule
 
-module set_counter_bit(input CLR_n, input Lp, input Cp, input b, input A, input CLK, output reg S)
+module set_counter_bit(input CLR_n, input Lp, input Cp, input b, input A, input CLK, output S);
 
   wire j, k;
   j_k_logic jk_logic(CLR_n, Lp, Cp, b, A, j, k);
@@ -61,15 +61,15 @@ module set_counter_bit(input CLR_n, input Lp, input Cp, input b, input A, input 
 
 endmodule
 
-module main (
+module ProgramCounter (
   inout wire[3:0] bits_in_out,
   input wire clk,
   input wire clr_n,
   input wire lp,
   input wire cp,
   input wire ep
-)
-  output reg[3:0] counter;
+);
+  output[3:0] counter;
   set_counter_bit set_bit_0(clr_n, lp, cp, bits_in_out[0], 1, clk, counter[0]);
   set_counter_bit set_bit_1(clr_n, lp, cp, bits_in_out[1], (counter[0]), clk, counter[1]);
   set_counter_bit set_bit_2(clr_n, lp, cp, bits_in_out[2], (counter[0] & counter[1]), clk, counter[2]);

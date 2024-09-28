@@ -25,3 +25,23 @@ module tt_um_example (
   wire _unused = &{ena, clk, rst_n, 1'b0};
 
 endmodule
+
+
+module JK_flip_flop(input j, input k, input clk, output reg q);
+
+  always @ (posedge clk)
+    case ({j,k})
+      2'b00: q <= q;
+      2'b01: q <= 0;
+      2'b10: q <= 1;
+      2'b11: q <= ~q;
+    endcase
+endmodule
+
+module set_counter_bit(input CLR_n, input Lp, input Cp, input b, input A, input CLK, output reg S)
+
+  wire j, k;
+  j_k_logic jk_logic(CLR_n, Lp, Cp, b, A, j, k);
+  JK_flip_flop flip_flop(j, k, CLK, S);
+
+endmodule

@@ -17,16 +17,16 @@ module program_counter_top (
 );
 
   wire[3:0] data;
-  assign data[3:0] = uio_in[3:0]
+  assign data[3:0] = uio_in[3:0];
   ProgramCounter pc(
     data,
     clk,
+    rst_n,
     ui_in[0],
     ui_in[1],
-    ui_in[2],
-    ui_in[3]
+    ui_in[2]
   );
-  assign uio_out[3:0] = data[3:0]
+  assign uio_out[3:0] = data[3:0];
 
 endmodule
 

@@ -20,7 +20,7 @@ module tt_um_program_counter_top_level (
     uio_in[3:0],
     uio_out[3:0],
     clk,
-    rst_n,
+    ui_in[3], // rst_n,
     ui_in[0],
     ui_in[1],
     ui_in[2]
@@ -31,7 +31,7 @@ module tt_um_program_counter_top_level (
   assign uio_out[7:4] = 0;
   assign uio_oe  = 0;
   // List all unused inputs to prevent warnings
-  wire _unused = &{ena, ui_in[7], ui_in[6], ui_in[5], ui_in[4], ui_in[3], 1'b0};
+  wire _unused = &{ena, ui_in[7], ui_in[6], ui_in[5], ui_in[4], /*ui_in[3],*/ rst_n, 1'b0};
 
 endmodule
 

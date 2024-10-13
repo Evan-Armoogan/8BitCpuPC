@@ -84,5 +84,8 @@ module ProgramCounter (
   set_counter_bit set_bit_1(clr_n, lp, cp, bits_in[1], (counter[0]), clk, counter[1]);
   set_counter_bit set_bit_2(clr_n, lp, cp, bits_in[2], (counter[0] & counter[1]), clk, counter[2]);
   set_counter_bit set_bit_3(clr_n, lp, cp, bits_in[3], (counter[0] & counter[1] & counter[2]), clk, counter[3]);
-  assign bits_out = ep? counter : 4'bZZZZ;
+
+  reg enable;
+  always @ (posedge clk) enable <= ep;
+  assign bits_out = enable ? counter : 4'bZZZZ;
 endmodule

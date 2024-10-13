@@ -28,6 +28,13 @@ module tt_um_program_counter_top_level (
   );
   assign uio_out[3:0] = data[3:0];
 
+  // All output pins must be assigned. If not used, assign to 0.
+  assign uo_out  = 0;
+  assign uio_out[7:4] = 0;
+  assign uio_oe  = 0;
+  // List all unused inputs to prevent warnings
+  wire _unused = &{ena, ui_in[7], ui_in[6], ui_in[5], ui_in[4], ui_in[3] 1'b0};
+
 endmodule
 
 module j_k_logic (

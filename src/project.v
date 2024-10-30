@@ -41,14 +41,18 @@ module j_k_logic (
   input cp,
   input bn,
   input a,
-  output j,
-  output k
+  input clk,
+  output reg j,
+  output reg k
 );
   wire plp_cp_a;
   assign plp_cp_a = ~lp & cp & a;
 
-  assign j = (pclr & plp_cp_a) | (pclr & lp & bn);
-  assign k = (~pclr) | (plp_cp_a) | (lp & ~bn);
+  always @ (posedge clk)
+  begin
+    j <= (pclr & plp_cp_a) | (pclr & lp & bn);
+    k <= (~pclr) | (plp_cp_a) | (lp & ~bn);
+  end
 endmodule
 
 module JK_flip_flop(input j, input k, input clk, output reg q);
@@ -64,8 +68,8 @@ endmodule
 
 module set_counter_bit(input CLR_n, input Lp, input Cp, input b, input A, input CLK, output S);
 
-  wire j, k;
-  j_k_logic jk_logic(CLR_n, Lp, Cp, b, A, j, k);
+  reg j, k;
+  j_k_logic jk_logic(CLR_n, Lp, Cp, b, A, CLK, j, k);
   JK_flip_flop flip_flop(j, k, CLK, S);
 
 endmodule

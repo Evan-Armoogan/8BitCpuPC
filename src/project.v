@@ -76,7 +76,7 @@ endmodule
 
 module ProgramCounter (
   input wire[3:0] bits_in,
-  output wire [3:0] bits_out,
+  output reg [3:0] bits_out,
   input wire clk,
   input wire clr_n,
   input wire lp,

@@ -66,7 +66,7 @@ module JK_flip_flop(input j, input k, input clk, output reg q);
     endcase
 endmodule
 
-module set_counter_bit(input CLR_n, input Lp, input Cp, input b, input A, input CLK, output S);
+module set_counter_bit(input CLR_n, input Lp, input Cp, input b, input A, input CLK, output reg S);
 
   reg j, k;
   j_k_logic jk_logic(CLR_n, Lp, Cp, b, A, CLK, j, k);
@@ -76,14 +76,14 @@ endmodule
 
 module ProgramCounter (
   input wire[3:0] bits_in,
-  output reg [3:0] bits_out,
+  output wire [3:0] bits_out,
   input wire clk,
   input wire clr_n,
   input wire lp,
   input wire cp,
   input wire ep
 );
-  wire[3:0] counter;
+  reg[3:0] counter;
   set_counter_bit set_bit_0(clr_n, lp, cp, bits_in[0], 1, clk, counter[0]);
   set_counter_bit set_bit_1(clr_n, lp, cp, bits_in[1], (counter[0]), clk, counter[1]);
   set_counter_bit set_bit_2(clr_n, lp, cp, bits_in[2], (counter[0] & counter[1]), clk, counter[2]);
@@ -93,11 +93,11 @@ module ProgramCounter (
   always @ (posedge clk)
   begin
     enable <= ep;
-    if(enable) begin
-      bits_out  <= counter;
-    end
-    else 
-      bits_out <= 4'bZZZZ;
+    //if(enable) begin
+     //bits_out <= counter;
+    //end
+    //else 
+      //bits_out <= 4'bZZZZ;
   end
-  //assign bits_out = enable ? counter : 4'bZZZZ;
+  assign bits_out = enable ? counter : 4'bZZZZ;
 endmodule

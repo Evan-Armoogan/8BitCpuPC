@@ -38,6 +38,20 @@ Now generate a sequence of operations that tests all of the following operations
 - Load a new value while the counter is incrementing
 - Reset the chip and verify the counter is reset to 0
 
+Some example test waveforms are attached:
+- test_count: Counts from 0 up to F
+![test_count.PNG]
+- test_load: Counts and loads the value of 5 after 9 clock periods
+![test_load.PNG]
+- test_pause: Counts and pauses for 2 clock periods after 7 clock periods
+![test_pause.PNG]
+- test_pause_load: Counts and pauses after 7 clock periods then loads
+![test_pause_load.PNG]
+- test_disable: Disables counter output for 2 cycles after 9 clock periods
+![test_disable.PNG]
+- test_loop: Counts from 0 up to F then loops back to 0
+![test_loop.PNG]
+
 ## External hardware
 
 No external hardware is required to run the counter. It may be helpful to have tools that allow you to easily view the output of the counter.

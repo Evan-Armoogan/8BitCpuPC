@@ -16,14 +16,6 @@ module tt_um_program_counter_top_level (
     input  wire       rst_n     // reset_n - low to reset
 );
 
-  // TODO during integration
-  // Only use ou_out, not uio_out
-  // Don't drive the upper 4 bits of the bus
-
-  // Get rid of uio_out use. Use uo_out instead.
-  // Change uio_in to ui_in[7:4]
-  // Modify tests that use reset
-
   ProgramCounter pc(
     ui_in[7:4],
     uo_out[3:0],

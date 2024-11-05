@@ -69,56 +69,57 @@ async def test_count(dut):
         await ClockCycles(dut.clk, 1)
         assert dut.uio_out.value == i
 
-@cocotb.test()
-async def test_clear(dut):
-    dut._log.info("Start")
+# This one doesn't work when we don't have a control signal connected to clr_n instead of rst_n
+# @cocotb.test()
+# async def test_clear(dut):
+#     dut._log.info("Start")
 
-    # Set the clock period to 100 ns (10 MHz)
-    clock = Clock(dut.clk, 100, units="ns")
-    cocotb.start_soon(clock.start())
+#     # Set the clock period to 100 ns (10 MHz)
+#     clock = Clock(dut.clk, 100, units="ns")
+#     cocotb.start_soon(clock.start())
 
-    # Reset
-    dut._log.info("Reset")
-    dut.ena.value = 1
-    dut.ui_in.value = 0
-    dut.uio_in.value = 0
-    dut.rst_n.value = 0
-    await ClockCycles(dut.clk, 10)
-    dut.rst_n.value = 1
+#     # Reset
+#     dut._log.info("Reset")
+#     dut.ena.value = 1
+#     dut.ui_in.value = 0
+#     dut.uio_in.value = 0
+#     dut.rst_n.value = 0
+#     await ClockCycles(dut.clk, 10)
+#     dut.rst_n.value = 1
 
-    dut._log.info("Counting and clear midway")
+#     dut._log.info("Counting and clear midway")
 
-    signals = ControlSignals()
+#     signals = ControlSignals()
 
-    # enable bus output
-    signals.set_control_signals(ep=1)
-    dut.ui_in.value = signals.get_control_signals()
-    await ClockCycles(dut.clk, 1)
+#     # enable bus output
+#     signals.set_control_signals(ep=1)
+#     dut.ui_in.value = signals.get_control_signals()
+#     await ClockCycles(dut.clk, 1)
 
-    # Set the input values you want to test
-    signals.set_control_signals(cp=1, lp=0, clr=1)
-    dut.ui_in.value = signals.get_control_signals()
-    dut.uio_in.value = 0
+#     # Set the input values you want to test
+#     signals.set_control_signals(cp=1, lp=0, clr=1)
+#     dut.ui_in.value = signals.get_control_signals()
+#     dut.uio_in.value = 0
 
-    for i in range(8):
-        await ClockCycles(dut.clk, 1)
-        assert dut.uio_out.value == i
+#     for i in range(8):
+#         await ClockCycles(dut.clk, 1)
+#         assert dut.uio_out.value == i
 
-    signals.set_control_signals(clr=0)
-    dut.ui_in.value = signals.get_control_signals()
-    await ClockCycles(dut.clk, 1)
-    assert dut.uio_out.value == 8
+#     signals.set_control_signals(clr=0)
+#     dut.ui_in.value = signals.get_control_signals()
+#     await ClockCycles(dut.clk, 1)
+#     assert dut.uio_out.value == 8
 
-    signals.set_control_signals(clr=1)
-    dut.ui_in.value = signals.get_control_signals()
+#     signals.set_control_signals(clr=1)
+#     dut.ui_in.value = signals.get_control_signals()
 
-    # Should reset this clock cycle because RST will be 0 for the edge
-    await ClockCycles(dut.clk, 1)
-    assert dut.uio_out.value == 0
+#     # Should reset this clock cycle because RST will be 0 for the edge
+#     await ClockCycles(dut.clk, 1)
+#     assert dut.uio_out.value == 0
 
-    for i in range(1, 8):
-        await ClockCycles(dut.clk, 1)
-        assert dut.uio_out.value == i
+#     for i in range(1, 8):
+#         await ClockCycles(dut.clk, 1)
+#         assert dut.uio_out.value == i
 
 
 @cocotb.test()

@@ -20,11 +20,15 @@ module tt_um_program_counter_top_level (
   // Only use ou_out, not uio_out
   // Don't drive the upper 4 bits of the bus
 
+  // Get rid of uio_out use. Use uo_out instead.
+  // Change uio_in to ui_in[7:4]
+  // Modify tests that use reset
+
   ProgramCounter pc(
     uio_in[3:0],
     uio_out[3:0],
     clk,
-    ui_in[3], // rst_n,
+    rst_n,
     ui_in[0],
     ui_in[1],
     ui_in[2]
@@ -84,7 +88,7 @@ module ProgramCounter (
   input wire ep
 );
   wire[3:0] counter;
-  set_counter_bit set_bit_0(clr_n, lp, cp, bits_in[0], 1, clk, counter[0]);
+  set_counter_bit set_bit_0(clr_n, lp, cp, bits_in[0], 1'b1, clk, counter[0]);
   set_counter_bit set_bit_1(clr_n, lp, cp, bits_in[1], (counter[0]), clk, counter[1]);
   set_counter_bit set_bit_2(clr_n, lp, cp, bits_in[2], (counter[0] & counter[1]), clk, counter[2]);
   set_counter_bit set_bit_3(clr_n, lp, cp, bits_in[3], (counter[0] & counter[1] & counter[2]), clk, counter[3]);

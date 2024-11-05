@@ -79,11 +79,19 @@ module ProgramCounter (
   input wire cp,
   input wire ep
 );
+// Below are some code modifications to make the counter loop back to 0 after 9 (since there are only 9 instructions)
   wire[3:0] counter;
-  set_counter_bit set_bit_0(clr_n, lp, cp, bits_in[0], 1'b1, clk, counter[0]);
-  set_counter_bit set_bit_1(clr_n, lp, cp, bits_in[1], (counter[0]), clk, counter[1]);
-  set_counter_bit set_bit_2(clr_n, lp, cp, bits_in[2], (counter[0] & counter[1]), clk, counter[2]);
-  set_counter_bit set_bit_3(clr_n, lp, cp, bits_in[3], (counter[0] & counter[1] & counter[2]), clk, counter[3]);
+  reg reach_nine;
+
+  wire clr_n1;
+  assign clr_n1 = clr_n & ~(reach_nine & cp);
+
+  set_counter_bit set_bit_0(clr_n1, lp, cp, bits_in[0], 1'b1, clk, counter[0]);
+  set_counter_bit set_bit_1(clr_n1, lp, cp, bits_in[1], (counter[0]), clk, counter[1]);
+  set_counter_bit set_bit_2(clr_n1, lp, cp, bits_in[2], (counter[0] & counter[1]), clk, counter[2]);
+  set_counter_bit set_bit_3(clr_n1, lp, cp, bits_in[3], (counter[0] & counter[1] & counter[2]), clk, counter[3]);
+
+  always @(*) reach_nine <= counter[0] & ~counter[1] & ~counter[2] & counter[3];
 
   reg enable;
   always @ (posedge clk) enable <= ep;

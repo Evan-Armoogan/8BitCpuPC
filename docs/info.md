@@ -46,6 +46,16 @@ Some example test waveforms are attached:
 - test_disable: Disables counter output for 2 cycles after 9 clock periods
 - test_loop: Counts from 0 up to F then loops back to 0
 
+The order of the signals in the waveforms is as follows:
+- clk
+- ena
+- rst_n
+- ui_in[7:0]
+- uio_in[7:0]
+- uio_oe[7:0]
+- uio_out[7:0]
+- uo_out[7:0]
+
 ## External hardware
 
 No external hardware is required to run the counter. It may be helpful to have tools that allow you to easily view the output of the counter.
